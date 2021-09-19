@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -162,8 +163,9 @@ public class StreetMapApp extends Application {
     canvas.addEventFilter(MouseEvent.MOUSE_CLICKED, busStopEventHandler);
 
     //Setting the Scene object
-    final Group root = new Group(canvas);
-    final Scene scene = new Scene(root);
+    final ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setContent(canvas);
+    final Scene scene = new Scene(scrollPane);
     stage.setTitle(name);
     stage.setScene(scene);
     stage.getIcons().add(new Image("file:91M.png"));

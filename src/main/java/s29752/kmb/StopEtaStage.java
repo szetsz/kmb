@@ -74,6 +74,7 @@ class StopEtaStage {
 //    dialog.setOpacity(.8);
     dialog.setScene(newScene(scheduler));
     dialog.sizeToScene();
+    dialog.setResizable(false);
     dialog.show();
 
     final IntegerCoordinate position = p.getPosition(dialog.getWidth(), dialog.getHeight());
