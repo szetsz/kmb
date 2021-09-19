@@ -13,7 +13,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -125,7 +125,7 @@ interface URLs {
   static Kmb.StopEta readStopEtas(BusStop stop) {
     final String url = STOP_ETA_PREFIX + stop.getId();
     final JsonObject json = JsonParser.parseString(readLine(url)).getAsJsonObject();
-    final LocalDateTime generated = Utils.toLocalDateTime(json.get("generated_timestamp"));
+    final ZonedDateTime generated = Utils.toZonedDateTime(json.get("generated_timestamp"));
     final JsonArray data = json.getAsJsonArray("data");
     final List<Kmb.Eta> etas = new ArrayList<>(data.size());
     for (int i = 0; i < data.size(); i++) {

@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,7 +27,7 @@ class StopEtaStage {
   }
 
   VBox newEtaBox() {
-    final LocalDateTime now = LocalDateTime.now();
+    final ZonedDateTime now = Utils.now();
     final VBox vBox = new VBox(2 * SPACING);
     final Text lastUpdated = new Text("Last Updated: " + now);
     lastUpdated.setTextAlignment(TextAlignment.RIGHT);
@@ -71,7 +71,7 @@ class StopEtaStage {
     final StreetMapApp.AppProperties p = streetMapApp.getAppProperties();
     dialog.initOwner(p.getStage());
     dialog.setTitle("" + stop);
-    dialog.setOpacity(.8);
+//    dialog.setOpacity(.8);
     dialog.setScene(newScene(scheduler));
     dialog.sizeToScene();
     dialog.show();

@@ -4,7 +4,7 @@ import com.google.common.base.Suppliers;
 import com.google.gson.JsonObject;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -257,9 +257,9 @@ public class Kmb {
           Integer.parseInt(eta.get("seq").getAsString()),
           Name.get("dest", eta),
           Integer.parseInt(eta.get("eta_seq").getAsString()),
-          Utils.toLocalDateTime(eta.get("eta")),
+          Utils.toZonedDateTime(eta.get("eta")),
           Name.get("rmk", eta),
-          Utils.toLocalDateTime(eta.get("data_timestamp")));
+          Utils.toZonedDateTime(eta.get("data_timestamp")));
     }
 
     private final BusStop stop;
@@ -270,12 +270,12 @@ public class Kmb {
     private final int seq;
     private final Name dest;
     private final int etaSeq;
-    private final LocalDateTime eta;
+    private final ZonedDateTime eta;
     private final Name remark;
-    private final LocalDateTime timestamp;
+    private final ZonedDateTime timestamp;
 
     Eta(BusStop stop, Company company, String route, Route.Type type, int seq,
-        Name dest, int etaSeq, LocalDateTime eta, Name remark, LocalDateTime timestamp) {
+        Name dest, int etaSeq, ZonedDateTime eta, Name remark, ZonedDateTime timestamp) {
       this.stop = stop;
       this.company = company;
       this.route = route;
@@ -300,7 +300,7 @@ public class Kmb {
       return seq;
     }
 
-    LocalDateTime getEta() {
+    ZonedDateTime getEta() {
       return eta;
     }
 
@@ -324,9 +324,9 @@ public class Kmb {
   static class StopEta {
     private final BusStop stop;
     private final List<Kmb.Eta> etas;
-    private final LocalDateTime generated;
+    private final ZonedDateTime generated;
 
-    StopEta(BusStop stop, List<Eta> etas, LocalDateTime generated) {
+    StopEta(BusStop stop, List<Eta> etas, ZonedDateTime generated) {
       this.stop = stop;
       this.etas = etas;
       this.generated = generated;
@@ -337,7 +337,7 @@ public class Kmb {
     }
 
     boolean isExpired() {
-      return Duration.between(generated, LocalDateTime.now()).getSeconds() > 30;
+      return Duration.between(generated, Utils.now()).getSeconds() > 30;
     }
   }
 

@@ -173,7 +173,7 @@ public class StreetMapApp extends Application {
     stage.show();
 
     appProperties.set(new AppProperties(stage));
-    stage.centerOnScreen();
+//    stage.centerOnScreen();
     stage.setX(Screen.getPrimary().getBounds().getWidth() - stage.getWidth());
   }
 
